@@ -9,14 +9,10 @@ namespace
 	constexpr int kWaitFrameMax = 180;
 	//車の速度
 	constexpr float kSpeed = -24.0f;
-
-	//キャラクターのサイズ
-	constexpr float kSizeX = 128.0f;
-	constexpr float kSizeY = 128.0f;
-	//ジャンプ力
-	constexpr float kJumpAcc = -25.0f;
-	//重力
-	constexpr float kGravity = 0.8f;
+	//車のジャンプ力
+	constexpr float kCarJumpAcc = -30.0f;
+	//車の重力
+	constexpr float kCarGravity = 0.8f;
 }
 
 Car::Car()
@@ -44,6 +40,7 @@ void Car::setup(float fieldY)
 
 	//動きのバリエーションを選択
 	int randNum = GetRand(99);
+
 	if (randNum < 38)
 	{
 		m_moveType = kMoveTypeNormal;
@@ -109,13 +106,21 @@ void Car::updateNormal()
 //一旦停止フェイント
 void Car::updateStop()
 {
-	updateNormal(); //仮
+	int carReturnGame = Game::kScreenWidth / 2;
+	m_pos += m_vec;
+
+	if (m_pos.x <= carReturnGame)
+	{
+		m_vec.x = 0;
+	}
 }
 
 //ジャンプする
 void Car::updateJump()
 {
+
 	m_pos += m_vec;
+
 	//地面との当たり判定
 	bool isField = false;
 	if (m_pos.y > m_fieldY - m_size.y)
@@ -124,20 +129,23 @@ void Car::updateJump()
 		isField = true;
 	}
 
-	// キー入力処理
-	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	if (padState & PAD_INPUT_1)
+	if (isField)
 	{
-		if (isField)
-		{
-			m_vec.y = kJumpAcc; //ジャンプ開始
-		}
+		m_vec.y = kCarJumpAcc; //ジャンプ開始
 	}
-	m_vec.y += kGravity;//重力
+
+	m_vec.y += kCarGravity;//重力
+
 }
 
 //途中で引き返す（必ず成功）
 void Car::updateReturn()
 {
-	updateNormal(); //仮
+	int carReturnGame = Game:: kScreenWidth / 2;
+	m_pos += m_vec;
+
+	if (m_pos.x <= carReturnGame)
+	{	
+		m_vec.x++;
+	}
 }

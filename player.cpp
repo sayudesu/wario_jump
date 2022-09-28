@@ -72,8 +72,6 @@ void Player::update()
 
 void Player::draw()
 {
-	//if (m_isDead)	return;
-	//DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
 	//¶‚«‚Ä‚¢‚éê‡€‚ñ‚Å‚¢‚éê‡‚Ì‰æ‘œ•\¦ˆÊ’u‚ğ•ÏX
 	if (m_isDead)
 	{
