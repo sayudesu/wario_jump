@@ -29,7 +29,7 @@ void Car::setGraphic(int handle)
 	GetGraphSizeF(m_handle, &m_size.x, &m_size.y);
 }
 
-void Car::setup(float fieldY)
+int Car::setup(float fieldY)
 {
 	m_fieldY = fieldY;
 	m_pos.x = Game::kScreenWidth + 16.0f;
@@ -62,6 +62,8 @@ void Car::setup(float fieldY)
 
 	//動き始めるまでの時間を設定 1秒から3秒待つ　60フレームから180フレーム
 	m_waitFrame = GetRand(kWaitFrameMax) + kWaitFrameMin;
+
+	return m_moveType;
 }
 
 void Car::update()
@@ -92,7 +94,8 @@ void Car::update()
 
 void Car::draw()
 {
-	DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+	//DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+	DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_size.x, m_size.y, m_handle, true, false);
 }
 
 //private///////////////////////////////////////////////////////////
@@ -102,23 +105,21 @@ void Car::updateNormal()
 {
 	m_pos += m_vec;
 }
-
 //一旦停止フェイント
 void Car::updateStop()
-{
-	int carReturnGame = Game::kScreenWidth / 2;
+{	
 	m_pos += m_vec;
-
-	if (m_pos.x <= carReturnGame)
+	
+	if (m_pos.x <= Game::kScreenWidth / 2)
 	{
 		m_vec.x = 0;
 	}
+	
 }
 
 //ジャンプする
 void Car::updateJump()
 {
-
 	m_pos += m_vec;
 
 	//地面との当たり判定
@@ -141,11 +142,11 @@ void Car::updateJump()
 //途中で引き返す（必ず成功）
 void Car::updateReturn()
 {
-	int carReturnGame = Game:: kScreenWidth / 2;
 	m_pos += m_vec;
 
-	if (m_pos.x <= carReturnGame)
+	if (m_pos.x <= Game::kScreenWidth / 2)
 	{	
 		m_vec.x++;
+		//DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_size.x, m_size.y, m_handle, true, true);
 	}
 }

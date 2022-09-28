@@ -12,7 +12,7 @@ public:
 	void setGraphic(int handle);
 
 	// ‰Šúİ’è	’n–Ê‚Ì‚‚³‚ğ—^‚¦‚é
-	void setup(float fieldY);
+	int setup(float fieldY);
 
 	// XV
 	void update();

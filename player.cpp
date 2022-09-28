@@ -11,6 +11,8 @@ namespace
 	constexpr float kJumpAcc = -25.0f;
 	//重力
 	constexpr float kGravity = 0.8f;
+	//キャラクター走りスピード
+	constexpr float kRunSpeed = 10.0f;
 }
 
 Player::Player()
@@ -59,15 +61,42 @@ void Player::update()
 
 	// キー入力処理
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	if (padState & PAD_INPUT_1)
+	if(CheckHitKey(KEY_INPUT_SPACE) == 1)
+	//if (padState & PAD_INPUT_1)
 	{
 		if (isField)
 		{
 			m_vec.y = kJumpAcc; //ジャンプ開始
 		}
 	}
-	m_vec.y += kGravity;//重力
-	
+	m_vec.y += kGravity; //重力
+
+	//キャラクターの横移動
+	if (CheckHitKey(KEY_INPUT_D) == 1)//右
+	{
+		m_pos.x += kRunSpeed;
+
+		if (CheckHitKey(KEY_INPUT_LSHIFT) == 1)//右に走るスピードアップ
+		{
+			m_pos.x += kRunSpeed;
+		}
+
+		if (m_pos.x == Game::kScreenWidth)
+		{
+			m_vec.x = 0;
+		}
+
+	}
+	if (CheckHitKey(KEY_INPUT_A) == 1)//左
+	{
+		m_pos.x -= kRunSpeed;
+
+		if (CheckHitKey(KEY_INPUT_LSHIFT) == 1)//左に走るスピードアップ
+		{
+			m_pos.x -= kRunSpeed;
+		}
+	}
+
 }
 
 void Player::draw()
