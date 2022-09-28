@@ -38,7 +38,10 @@ void Player::update()
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	if (padState & PAD_INPUT_1)
 	{
-		m_isJumpUp = true;
+		if (m_pos.y >= m_fieldY - m_graphSize.y)
+		{
+			m_isJumpUp = true;
+		}
 	}
 
 	if (m_isJumpUp)//è„è∏
