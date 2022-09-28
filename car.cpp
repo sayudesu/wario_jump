@@ -44,10 +44,37 @@ void Car::update()
 		m_waitFrame--;
 		return;
 	}
-	m_pos += m_vec;
+
+	updateNormal();
 }
 
 void Car::draw()
 {
 	DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+}
+
+//private///////////////////////////////////////////////////////////
+
+//まっすぐ進む
+void Car::updateNormal()
+{
+	m_pos += m_vec;
+}
+
+//一旦停止フェイント
+void Car::updateStop()
+{
+
+}
+
+//ジャンプする
+void Car::updateJump()
+{
+
+}
+
+//途中で引き返す（必ず成功）
+void Car::updateReturn()
+{
+
 }

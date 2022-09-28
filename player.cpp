@@ -40,8 +40,13 @@ void Player:: setup(float fieldY)
 
 void Player::update()
 {
-	//€‚ñ‚¾‚ç“®‚¯‚È‚¢
-	if (m_isDead) return;
+	//€‚ñ‚¾‚ç‰Eã‚É”ò‚Ô
+	if (m_isDead)
+	{
+		m_pos.x -= 10;
+		m_pos.y -= 10;
+		return;
+	}
 
 	m_pos += m_vec;
 	//’n–Ê‚Æ‚Ì“–‚½‚è”»’è

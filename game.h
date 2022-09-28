@@ -7,8 +7,8 @@ namespace Game
 	// ウインドウ名
 	const char* const kTitleText = "ゲーム名";
 	// ウインドウサイズ
-	constexpr int kScreenWidth = 640;
-	constexpr int kScreenHeight = 480;
+	constexpr int kScreenWidth = 640 * 2;
+	constexpr int kScreenHeight = 480 * 2;
 	// カラーモード
 	constexpr int kColorDepth = 32;		// 32 or 16
 };
