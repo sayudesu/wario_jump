@@ -19,8 +19,10 @@ Car::Car()
 {
 	m_handle = -1;
 	m_fieldY = 0.0f;
-	m_moveType = kMoveTypeNormal;
+	m_moveType;// = kMoveTypeNormal;
 	m_waitFrame = 0;
+	m_carLoop = 0;
+	m_stopTimer = 0;
 }
 
 void Car::setGraphic(int handle)
@@ -58,8 +60,6 @@ int Car::setup(float fieldY)
 		m_moveType = kMoveTypeReturn;
 	}
 
-	m_moveType = rand() % kMoveTypeNum;
-
 	//動き始めるまでの時間を設定 1秒から3秒待つ　60フレームから180フレーム
 	m_waitFrame = GetRand(kWaitFrameMax) + kWaitFrameMin;
 
@@ -89,7 +89,6 @@ void Car::update()
 		updateReturn();
 		break;
 	}
-
 }
 
 void Car::draw()
@@ -113,6 +112,13 @@ void Car::updateStop()
 	if (m_pos.x <= Game::kScreenWidth / 2)
 	{
 		m_vec.x = 0;
+
+		m_stopTimer++;
+		//m_stopTimerが20になったら車が動き出す
+		if (m_stopTimer > 20)
+		{
+			m_vec.x = kSpeed;
+		}
 	}
 	
 }

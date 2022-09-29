@@ -54,6 +54,10 @@ private:
 
 	//移動開始までの待ち時間(フレーム数)
 	int m_waitFrame;
+	//車を出し続ける
+	int m_carLoop;
+	//車が一旦停止したあと動き出す
+	int m_stopTimer;
 
 	// 位置
 	Vec2 m_pos;
