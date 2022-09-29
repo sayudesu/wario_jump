@@ -2,6 +2,8 @@
 
 namespace Game
 {
+	//gittest
+
 	// ウインドウモード設定
 	constexpr bool kWindowMode = true;
 	// ウインドウ名
