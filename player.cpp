@@ -76,6 +76,7 @@ void Player::update()
 	{
 		m_pos.x += kRunSpeed;
 
+
 		if (CheckHitKey(KEY_INPUT_LSHIFT) == 1)//右に走るスピードアップ
 		{
 			m_pos.x += kRunSpeed;
@@ -101,8 +102,14 @@ void Player::update()
 
 void Player::draw()
 {
+	//左に移動する場合画像を反転
 	//生きている場合死んでいる場合の画像表示位置を変更
-	if (m_isDead)
+	//通常時
+	if (CheckHitKey(KEY_INPUT_A) == 1)//右)
+	{
+		DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_graphSize.x / 2, m_graphSize.y, m_handle, true, true);
+	}
+	else if (m_isDead)
 	{
 		DrawRectGraph(m_pos.x, m_pos.y, m_graphSize.x / 2, 0, m_graphSize.x , m_graphSize.y, m_handle, true);
 	}

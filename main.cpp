@@ -44,6 +44,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		LONGLONG  time = GetNowHiPerformanceCount();
 		// 画面のクリア
 		ClearDrawScreen();
+		 SetFontSize( 50 ) ;
+		DrawString(0, 0 , "<SPACE>キーでジャンプ", GetColor(255, 255, 255));
+		DrawString(0, 50 , "< A >で右移動  < D　>で左移動 ", GetColor(255, 255, 255));
+		DrawString(0, 100, "< SHIFT > & A || & D で加速 ", GetColor(255, 255, 255));
+		//DrawString(Game::kScreenWidth / 2.5 - 300, Game::kScreenHeight / 2 , "車のloopができないいい", GetColor(255, 255, 255));
 
 		player.update();
 		car.update();

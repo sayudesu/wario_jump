@@ -8,7 +8,7 @@ namespace
 	constexpr int kWaitFrameMin = 60;
 	constexpr int kWaitFrameMax = 180;
 	//車の速度
-	constexpr float kSpeed = -24.0f;
+	constexpr float kSpeed = -50.0f;
 	//車のジャンプ力
 	constexpr float kCarJumpAcc = -30.0f;
 	//車の重力
@@ -23,6 +23,8 @@ Car::Car()
 	m_waitFrame = 0;
 	m_carLoop = 0;
 	m_stopTimer = 0;
+
+	carReturn = false;
 }
 
 void Car::setGraphic(int handle)
@@ -93,8 +95,15 @@ void Car::update()
 
 void Car::draw()
 {
-	//DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
-	DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_size.x, m_size.y, m_handle, true, false);
+	//車が帰っていく場合画像が反転する
+	if (carReturn)
+	{
+		DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_size.x, m_size.y, m_handle, true, true);
+	}
+	else
+	{
+		DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_size.x, m_size.y, m_handle, true, false);
+	}
 }
 
 //private///////////////////////////////////////////////////////////
@@ -152,7 +161,7 @@ void Car::updateReturn()
 
 	if (m_pos.x <= Game::kScreenWidth / 2)
 	{	
+		carReturn = true;
 		m_vec.x++;
-		//DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_size.x, m_size.y, m_handle, true, true);
 	}
 }

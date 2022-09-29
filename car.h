@@ -59,10 +59,14 @@ private:
 	//車が一旦停止したあと動き出す
 	int m_stopTimer;
 
+	bool m_isRestart;
+
 	// 位置
 	Vec2 m_pos;
 	// ベクトル
 	Vec2 m_vec;
 	// 地面の高さ
 	float m_fieldY;
+
+	bool carReturn;
 };
