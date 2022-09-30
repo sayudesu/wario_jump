@@ -112,6 +112,9 @@ void Car::draw()
 void Car::updateNormal()
 {
 	m_pos += m_vec;
+
+	DrawString(0, 300, "updateNormal", GetColor(255, 255, 255));
+
 }
 //一旦停止フェイント
 void Car::updateStop()
@@ -129,7 +132,7 @@ void Car::updateStop()
 			m_vec.x = kSpeed;
 		}
 	}
-	
+	DrawString(0, 300, "updateStop", GetColor(255, 255, 255));
 }
 
 //ジャンプする
@@ -139,9 +142,9 @@ void Car::updateJump()
 
 	//地面との当たり判定
 	bool isField = false;
-	if (m_pos.y > m_fieldY - m_size.y)
+	if (m_pos.x <= Game::kScreenWidth / 2)
 	{
-		m_pos.y = m_fieldY - m_size.y;
+		//m_pos.y = m_fieldY - m_size.y;
 		isField = true;
 	}
 
